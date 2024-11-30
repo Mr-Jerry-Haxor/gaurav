@@ -37,40 +37,10 @@ def get_db_connection():
     return connection_pool.get_connection()
 
 def convert_to_html(content_json):
-    """Convert Draft.js JSON to basic HTML"""
-    try:
-        content_dict = json.loads(content_json)
-        html = []
-        
-        for block in content_dict['blocks']:
-            text = block['text']
-            block_type = block['type']
-            styles = block['inlineStyleRanges']
-            
-            if styles:
-                for style in sorted(styles, key=lambda x: x['offset'], reverse=True):
-                    start = style['offset']
-                    end = start + style['length']
-                    style_type = style['style']
-                    
-                    if style_type == 'BOLD':
-                        text = f"{text[:start]}<strong>{text[start:end]}</strong>{text[end:]}"
-                    elif style_type == 'ITALIC':
-                        text = f"{text[:start]}<em>{text[start:end]}</em>{text[end:]}"
-                    elif style_type == 'UNDERLINE':
-                        text = f"{text[:start]}<u>{text[start:end]}</u>{text[end:]}"
-                    elif style_type == 'STRIKETHROUGH':
-                        text = f"{text[:start]}<del>{text[start:end]}</del>{text[end:]}"
-            
-            if block_type == 'unstyled':
-                html.append(f"<p>{text}</p>")
-            elif block_type == 'ordered-list-item':
-                html.append(f"<li>{text}</li>")
-                
-        return "".join(html)
-    except Exception as e:
-        print(f"Error converting content to HTML: {e}")
-        return ""
+    # print(content_json)
+    # based on rish text editor convert to HTML
+    return content_json
+
 
 @app.route('/login', methods=['POST'])
 def login():

@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://poojithabackend.devhost.my';
+  private apiUrl = 'http://127.0.0.1:3000';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
