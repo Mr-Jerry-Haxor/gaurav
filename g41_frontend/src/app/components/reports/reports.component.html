@@ -5,7 +5,14 @@
   <div *ngFor="let item of items" class="item-container">
     <div *ngIf="item.type === 'content'" [innerHTML]="renderContent(item)"></div>
     <div *ngIf="item.type === 'chart'" class="chart-container">
-      <svg #chartRef class="chart" [attr.id]="item.data.id"></svg>
+      <canvas *ngIf="chartConfigs[item.data.id]" baseChart
+              [data]="chartConfigs[item.data.id].data"
+              [type]="chartConfigs[item.data.id].type"
+              [options]="chartConfigs[item.data.id].options">
+      </canvas>
+      <p *ngIf="chartConfigs[item.data.id]?.options?.plugins?.subtitle?.text" class="chart-caption">
+        {{ chartConfigs[item.data.id]?.options?.plugins?.subtitle?.text }}
+      </p>
     </div>
   </div>
 </div>
