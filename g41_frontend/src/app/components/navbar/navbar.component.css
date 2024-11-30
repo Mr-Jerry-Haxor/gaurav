@@ -15,15 +15,29 @@
   margin: 0;
 }
 
-.navbar-link, .navbar-button {
+.navbar-link {
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
   display: block;
+  cursor: pointer;
 }
 
-.navbar-link:hover, .navbar-button:hover {
-  background-color: #555;
+.navbar-button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: #c50202;
 }
 
 .active {

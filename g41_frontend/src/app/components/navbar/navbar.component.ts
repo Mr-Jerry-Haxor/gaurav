@@ -14,4 +14,13 @@ export class NavbarComponent {
     this.tokenService.removeToken();
     this.router.navigate(['/login']);
   }
+  routeToDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
+  routeToSummary(): void {
+    this.router.navigate(['/summary']);
+  }
+  routeToReports(): void {
+    this.router.navigate(['/reports']);
+  }
 }

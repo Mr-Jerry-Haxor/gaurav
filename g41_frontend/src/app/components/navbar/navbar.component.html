@@ -1,8 +1,8 @@
 <nav class="navbar" aria-label="Main Navigation">
   <ul class="navbar-list">
-    <li class="navbar-item"><a routerLink="/dashboard" routerLinkActive="active" class="navbar-link">Dashboard</a></li>
-    <li class="navbar-item"><a routerLink="/summary" routerLinkActive="active" class="navbar-link">Summary</a></li>
-    <li class="navbar-item"><a routerLink="/reports" routerLinkActive="active" class="navbar-link">Reports</a></li>
+    <li class="navbar-item"><a (click)="routeToDashboard()" class="navbar-link">Dashboard</a></li>
+    <li class="navbar-item"><a (click)="routeToSummary()" class="navbar-link">Summary</a></li>
+    <li class="navbar-item"><a (click)="routeToReports()" class="navbar-link">Reports</a></li>
     <li class="navbar-item"><button (click)="handleLogout()" class="navbar-button">Logout</button></li>
   </ul>
 </nav>
