@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:3000';
+  private apiUrl = 'https://gauravbackend.devhost.my';
 
   constructor(private http: HttpClient) { }
 

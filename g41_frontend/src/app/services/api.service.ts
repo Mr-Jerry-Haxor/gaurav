@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://127.0.0.1:3000';
+  private apiUrl = 'https://gauravbackend.devhost.my';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
