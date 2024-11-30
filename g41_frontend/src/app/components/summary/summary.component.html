@@ -1,0 +1,11 @@
+<div *ngIf="loading">Loading...</div>
+<p *ngIf="error" style="color: red;" role="alert">{{ error }}</p>
+<div *ngIf="!loading && !error" class="summary-container" role="main">
+  <h2>Summary</h2>
+  <div *ngFor="let item of items" class="item-container">
+    <div *ngIf="item.type === 'content'" [innerHTML]="renderContent(item)"></div>
+    <div *ngIf="item.type === 'chart'" class="chart-container">
+      <svg #chartRef class="chart" [attr.id]="item.data.id"></svg>
+    </div>
+  </div>
+</div>
