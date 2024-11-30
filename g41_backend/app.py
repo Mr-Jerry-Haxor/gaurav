@@ -435,9 +435,9 @@ if __name__ == '__main__':
         conn.commit()
         
         print("Checking for default user...")
-        cursor.execute("SELECT * FROM users WHERE username = 'p75'")
+        cursor.execute("SELECT * FROM users WHERE username = 'g41'")
         if not cursor.fetchone():
-            cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", ('p75', '3433bafa203abbf94fde49a1e3fa0259f7e59af69b186ebf5e2507b4c5ff59b8b1737577f5b2436b777bf453f55dc4c29a5f1f12715364d27034262ebe401d71'))
+            cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", ('g41', '63865107aec5b45f8fa87a98cedc2779bd8bfceae8815bc254b8c9467fe9c6b04287d5c77e9a447e1b83b598b748d4cec7cff11bea74ed881fe4a4648e2614d3'))
             conn.commit()
             print("Default user created successfully")
         
