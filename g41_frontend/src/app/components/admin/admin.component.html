@@ -15,7 +15,10 @@
 
     <div class="form-group">
       <label for="contentEditor">Content:</label>
-      <textarea id="contentEditor" [(ngModel)]="editorState" name="editorState" rows="10" aria-label="Content Editor"></textarea>
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [(ngModel)]="editorState" name="editorState"  [disabled]="false" ></ngx-editor>
+      </div>
     </div>
 
     <button type="submit" class="submit-button" [attr.aria-label]="editMode === 'content' ? 'Update Content' : 'Add Content'">
@@ -33,7 +36,6 @@
         <option *ngFor="let type of chartTypes" [value]="type">{{ type }}</option>
       </select>
     </div>
-    
 
     <div class="form-group">
       <label for="chartData">Chart Data (JSON):</label>

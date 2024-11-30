@@ -15,6 +15,9 @@ import { AuthService } from './services/auth.service';
 import { TokenService } from './services/token.service';
 import { ApiService } from './services/api.service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastService } from './services/toast.service';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   imports: [
@@ -28,11 +31,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ReportsComponent,
     AdminComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ToastrModule.forRoot(), // ToastrModule added here
+    NgxEditorModule
   ],
   providers: [
     AuthService,
     TokenService,
+    ToastService,
     ApiService,
     provideHttpClient(),
     importProvidersFrom(AppRoutingModule),

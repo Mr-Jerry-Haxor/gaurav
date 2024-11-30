@@ -1,37 +1,25 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToastService {
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private toastr: ToastrService) {}
 
-  success(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['success-snackbar']
-    });
+  success(message: string, title?: string): void {
+    this.toastr.success(message, title);
   }
 
-  error(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['error-snackbar']
-    });
+  error(message: string, title?: string): void {
+    this.toastr.error(message, title);
   }
 
-  info(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['info-snackbar']
-    });
+  info(message: string, title?: string): void {
+    this.toastr.info(message, title);
   }
 
-  warning(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['warning-snackbar']
-    });
+  warning(message: string, title?: string): void {
+    this.toastr.warning(message, title);
   }
 }

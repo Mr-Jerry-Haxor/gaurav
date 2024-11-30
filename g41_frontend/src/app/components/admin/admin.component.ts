@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { NgxEditorModule, Editor, Toolbar } from 'ngx-editor';
+
+
+
 
 interface ContentItem {
   id: number;
@@ -21,16 +26,29 @@ interface ChartItem {
   chart_data: string;
 }
 
+
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxEditorModule],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+
+  editor: Editor = new Editor();
+  html = '';
+
+  private _pageType: string = 'dashboard';
+  get pageType(): string {
+    return this._pageType;
+  }
+  set pageType(value: string) {
+    this._pageType = value;
+    this.loadContentAndCharts();
+  }
+
   editorState = '';
-  pageType = 'dashboard';
   orderId = 1;
   chartType: keyof typeof this.sampleChartData = 'bar';
   chartData = '';
@@ -97,16 +115,44 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toastService: ToastService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.fetchData();
+    this.loadContentAndCharts();
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
+  loadContentAndCharts(): void {
+    // Fetch content and charts based on the current pageType
+    this.apiService.getAdminContents(this.pageType).subscribe(
+      (contents: ContentItem[]) => {
+        this.contents = contents;
+      },
+      error => {
+        console.error('Error fetching content', error);
+      }
+    );
+
+    this.apiService.getAdminCharts(this.pageType).subscribe(
+      (charts: ChartItem[]) => {
+        this.charts = charts;
+      },
+      error => {
+        console.error('Error fetching charts', error);
+      }
+    );
   }
 
   fetchData(): void {
     const token = this.authService.getToken();
     if (!token) {
+      this.toastr.error('Not authorized. Please login again.');
       this.toastService.error('Not authorized. Please login again.');
       this.router.navigate(['/login']);
       return;
@@ -243,7 +289,7 @@ export class AdminComponent implements OnInit {
     this.pageType = item.page_type;
     this.orderId = item.order_id;
     this.chartType = item.chart_type as 'bar' | 'line' | 'pie';
-    this.chartData = JSON.stringify(item.chart_data, null, 2);
+    this.chartData = item.chart_data;
   }
 
   resetForm(): void {
