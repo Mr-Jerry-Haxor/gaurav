@@ -18,6 +18,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastService } from './services/toast.service';
 import { NgxEditorModule } from 'ngx-editor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   imports: [
@@ -33,7 +37,18 @@ import { NgxEditorModule } from 'ngx-editor';
     NavbarComponent,
     PageNotFoundComponent,
     ToastrModule.forRoot(), // ToastrModule added here
-    NgxEditorModule
+    NgxEditorModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    WelcomeComponent,
+    RouterModule.forRoot([
+      // Define your routes here
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'summary', component: SummaryComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'admin', component: AdminComponent },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    ]),
   ],
   providers: [
     AuthService,

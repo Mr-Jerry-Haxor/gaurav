@@ -1,7 +1,7 @@
 .dashboard-container {
 max-width: 1200px;
 margin: 0 auto;
-padding: 2rem;
+padding: 4rem 2rem;
 }
 
 .loading {
@@ -31,11 +31,7 @@ padding: 2rem;
 text-align: justify !important
 }
 
-.dashboard-container {
-max-width: 1200px;
-margin: 0 auto;
-padding: 2rem;
-}
+
 
 .loading {
 text-align: center;
